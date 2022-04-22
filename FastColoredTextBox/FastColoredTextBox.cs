@@ -21,6 +21,7 @@
 // #define Styles32
 
 using FastColoredTextBoxNS.Feature;
+using FastColoredTextBoxNS.FindReplaceForms;
 using FastColoredTextBoxNS.Input;
 using FastColoredTextBoxNS.Text;
 using FastColoredTextBoxNS.Types;
@@ -1233,19 +1234,19 @@ namespace FastColoredTextBoxNS {
 		/// Change this property if you want to customize your find form
 		/// </summary>
 		[Browsable(false)]
-		public new FindForm FindForm { get; set; }
+		public new IFindForm FindForm { get; set; }
 
 		/// <summary>
 		/// Change this property if you want to customize your replace form
 		/// </summary>
 		[Browsable(false)]
-		public ReplaceForm ReplaceForm { get; set; }
+		public IReplaceForm ReplaceForm { get; set; }
 
 		/// <summary>
 		/// Change this property if you want to customize your goto form
 		/// </summary>
 		[Browsable(false)]
-		public GoToForm GoToForm { get; set; }
+		public IGotoForm GoToForm { get; set; }
 
 		/// <summary>
 		/// Do not change this property
@@ -2211,15 +2212,15 @@ namespace FastColoredTextBoxNS {
 		/// Shows find dialog
 		/// </summary>
 		public virtual void ShowFindDialog(string findText) {
+			// If the findform has not been set to a custom version, create a new one
 			if (FindForm == null)
 				FindForm = new FindForm(this);
 
 			if (findText != null)
-				FindForm.tbFind.Text = findText;
+				FindForm.SetPattern(findText);
 			else if (!Selection.IsEmpty && Selection.Start.iLine == Selection.End.iLine)
-				FindForm.tbFind.Text = Selection.Text;
+				FindForm.SetPattern(Selection.Text);
 
-			FindForm.tbFind.SelectAll();
 			FindForm.Show();
 			FindForm.Focus();
 		}
@@ -2239,11 +2240,10 @@ namespace FastColoredTextBoxNS {
 				ReplaceForm = new ReplaceForm(this);
 
 			if (findText != null)
-				ReplaceForm.tbFind.Text = findText;
+				ReplaceForm.SetPattern(findText);
 			else if (!Selection.IsEmpty && Selection.Start.iLine == Selection.End.iLine)
-				ReplaceForm.tbFind.Text = Selection.Text;
+				ReplaceForm.SetPattern(Selection.Text);
 
-			ReplaceForm.tbFind.SelectAll();
 			ReplaceForm.Show();
 			ReplaceForm.Focus();
 		}
@@ -2260,18 +2260,18 @@ namespace FastColoredTextBoxNS {
 			if (GoToForm == null)
 				GoToForm = new GoToForm();
 
-			GoToForm.TotalLineCount = LinesCount;
+			GoToForm.GetGotoer().MaxLineCount = LinesCount;
 
 			if (goToLine < 1)
-				GoToForm.SelectedLineNumber = Selection.Start.iLine + 1;
+				GoToForm.GetGotoer().Goto(Selection.Start.iLine + 1);
 			else
-				GoToForm.SelectedLineNumber = goToLine;
+				GoToForm.GetGotoer().Goto(goToLine);
 
 			if (GoToForm.ShowDialog() != DialogResult.OK) {
 				return;
 			}
 
-			SetSelectedLine(GoToForm.SelectedLineNumber);
+			SetSelectedLine(GoToForm.GetGotoer().SelectedLine);
 		}
 
 		/// <summary>
@@ -3325,10 +3325,10 @@ namespace FastColoredTextBoxNS {
 					break;
 
 				case FCTBAction.FindNext:
-					if (FindForm == null || FindForm.tbFind.Text == "")
+					if (FindForm == null || FindForm.GetPattern() == "")
 						ShowFindDialog();
 					else
-						FindForm.FindNext(FindForm.tbFind.Text);
+						FindForm.FindNext();
 					break;
 
 				case FCTBAction.ReplaceDialog:
