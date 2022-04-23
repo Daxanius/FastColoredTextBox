@@ -19,11 +19,9 @@ namespace FastColoredTextBoxNS.FindReplaceForms {
 			foreach (var r in ranges) { if (r.ReadOnly) { return false; } }
 
 			// Replace
-			_textBox.BeginUpdate();
 			_textBox.TextSource.Manager.ExecuteCommand(new ReplaceTextCommand(_textBox.TextSource, ranges, value));
 			_textBox.Selection.SetStartAndEnd(new Place(0, 0));
 			_textBox.Invalidate();
-			_textBox.EndUpdate();
 			return true;
 		}
 
