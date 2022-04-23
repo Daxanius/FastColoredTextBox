@@ -13,7 +13,7 @@ namespace FastColoredTextBoxNS.FindReplaceForms {
 		public Replacer(FastColoredTextBox textBox) : base(textBox) { }
 
 		private bool ReplaceRanges(string value, List<TextSelectionRange> ranges) {
-			if (ranges.Count > 0) { return false; }
+			if (ranges.Count == 0) { return false; }
 
 			// Check readonly
 			foreach (var r in ranges) { if (r.ReadOnly) { return false; } }
