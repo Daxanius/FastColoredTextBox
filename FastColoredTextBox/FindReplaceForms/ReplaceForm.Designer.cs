@@ -34,6 +34,7 @@
 			this.label2 = new System.Windows.Forms.Label();
 			this.tbReplace = new System.Windows.Forms.TextBox();
 			this.btPrev = new System.Windows.Forms.Button();
+			this.btReplace = new System.Windows.Forms.Button();
 			this.SuspendLayout();
 			// 
 			// btClose
@@ -49,7 +50,7 @@
 			// 
 			// btReplaceNext
 			// 
-			this.btReplaceNext.Location = new System.Drawing.Point(217, 143);
+			this.btReplaceNext.Location = new System.Drawing.Point(317, 143);
 			this.btReplaceNext.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
 			this.btReplaceNext.Name = "btReplaceNext";
 			this.btReplaceNext.Size = new System.Drawing.Size(88, 27);
@@ -112,7 +113,7 @@
 			// 
 			// btReplaceAll
 			// 
-			this.btReplaceAll.Location = new System.Drawing.Point(318, 143);
+			this.btReplaceAll.Location = new System.Drawing.Point(222, 177);
 			this.btReplaceAll.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
 			this.btReplaceAll.Name = "btReplaceAll";
 			this.btReplaceAll.Size = new System.Drawing.Size(88, 27);
@@ -142,7 +143,7 @@
 			// 
 			// btPrev
 			// 
-			this.btPrev.Location = new System.Drawing.Point(217, 176);
+			this.btPrev.Location = new System.Drawing.Point(222, 143);
 			this.btPrev.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
 			this.btPrev.Name = "btPrev";
 			this.btPrev.Size = new System.Drawing.Size(88, 27);
@@ -151,11 +152,23 @@
 			this.btPrev.UseVisualStyleBackColor = true;
 			this.btPrev.Click += new System.EventHandler(this.BtPrev_Click);
 			// 
+			// btReplace
+			// 
+			this.btReplace.Location = new System.Drawing.Point(126, 143);
+			this.btReplace.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+			this.btReplace.Name = "btReplace";
+			this.btReplace.Size = new System.Drawing.Size(88, 27);
+			this.btReplace.TabIndex = 11;
+			this.btReplace.Text = "Replace";
+			this.btReplace.UseVisualStyleBackColor = true;
+			this.btReplace.Click += new System.EventHandler(this.BtReplace_Click);
+			// 
 			// ReplaceForm
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
 			this.ClientSize = new System.Drawing.Size(420, 220);
+			this.Controls.Add(this.btReplace);
 			this.Controls.Add(this.btPrev);
 			this.Controls.Add(this.tbFind);
 			this.Controls.Add(this.label2);
@@ -194,5 +207,6 @@
 		public System.Windows.Forms.TextBox tbFind;
 		public System.Windows.Forms.TextBox tbReplace;
 		private System.Windows.Forms.Button btPrev;
+		private System.Windows.Forms.Button btReplace;
 	}
 }

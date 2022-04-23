@@ -7,7 +7,7 @@ namespace FastColoredTextBoxNS.FindReplaceForms {
 	///  A class that can find patterns in a FastColoredTextBox
 	/// </summary>
 	public class Finder {
-		private readonly FastColoredTextBox _textBox;
+		protected readonly FastColoredTextBox _textBox;
 
 		public FastColoredTextBox GetTextBox() => _textBox;
 		public TextSelectionRange GetSelection() => _textBox.Selection;

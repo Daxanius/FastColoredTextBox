@@ -40,8 +40,9 @@ namespace FastColoredTextBoxNS {
 
 		protected override void OnActivated(EventArgs e) => tbFind.Focus();
 		private void BtClose_Click(object sender, EventArgs e) => Close();
-		private void BtReplaceNext_Click(object sender, EventArgs e) => ReplaceNext();
-		private void BtPrev_Click(object sender, EventArgs e) => ReplacePrev();
+		private void BtReplaceNext_Click(object sender, EventArgs e) => FindNext();
+		private void BtPrev_Click(object sender, EventArgs e) => FindPrev();
+		private void BtReplace_Click(object sender, EventArgs e) => ReplaceSelection();
 		private void BtReplaceAll_Click(object sender, EventArgs e) => ReplaceAll();
 
 		public Replacer GetReplacer() => replacer;
@@ -50,9 +51,10 @@ namespace FastColoredTextBoxNS {
 		public string GetPattern() => tbFind.Text;
 		public void SetValue(string value) => tbReplace.Text = value;
 		public string GetValue() => tbReplace.Text;
-		void IReplaceForm.Focus() => Focus();
+		public Finder GetFinder() => replacer;
+		void IFindForm.Focus() => Focus();
 
-		void IReplaceForm.Show() {
+		new void Show() {
 			tbFind.SelectAll();
 			Show();
 		}
@@ -63,15 +65,22 @@ namespace FastColoredTextBoxNS {
 			} catch (Exception ex) { MessageBox.Show(ex.Message); }
 		}
 
-		public void ReplaceNext() {
+		public void ReplaceSelection() {
 			try {
-				replacer.ReplaceNext(GetPattern(), GetValue(), GetFindOptions());
+				replacer.ReplaceSelection(GetValue());
+				FindNext();
 			} catch (Exception ex) { MessageBox.Show(ex.Message); }
 		}
 
-		public void ReplacePrev() { 
+		public void FindNext() {
 			try {
-				replacer.ReplacePrev(GetPattern(), GetValue(), GetFindOptions()); 
+				replacer.FindNext(GetPattern(), GetFindOptions());
+			} catch (Exception ex) { MessageBox.Show(ex.Message); }
+		}
+
+		public void FindPrev() { 
+			try {
+				replacer.FindPrev(GetPattern(), GetFindOptions()); 
 			} catch (Exception ex) { MessageBox.Show(ex.Message); }
 		}
 	}
