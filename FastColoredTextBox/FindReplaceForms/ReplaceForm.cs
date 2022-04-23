@@ -78,9 +78,9 @@ namespace FastColoredTextBoxNS {
 			} catch (Exception ex) { MessageBox.Show(ex.Message); }
 		}
 
-		public void FindPrev() { 
+		public void FindPrev() {
 			try {
-				replacer.FindPrev(GetPattern(), GetFindOptions()); 
+				replacer.FindPrev(GetPattern(), GetFindOptions());
 			} catch (Exception ex) { MessageBox.Show(ex.Message); }
 		}
 	}

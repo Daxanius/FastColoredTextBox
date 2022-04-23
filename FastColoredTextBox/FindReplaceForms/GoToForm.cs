@@ -1,6 +1,6 @@
-﻿using System;
+﻿using FastColoredTextBoxNS.FindReplaceForms;
+using System;
 using System.Windows.Forms;
-using FastColoredTextBoxNS.FindReplaceForms;
 
 namespace FastColoredTextBoxNS {
 	public partial class GoToForm : Form, IGotoForm {

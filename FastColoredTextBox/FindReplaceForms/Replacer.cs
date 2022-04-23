@@ -1,8 +1,8 @@
-﻿using FastColoredTextBoxNS.Types;
-using FastColoredTextBoxNS.Input;
-using System.Text.RegularExpressions;
-using System.Collections.Generic;
+﻿using FastColoredTextBoxNS.Input;
+using FastColoredTextBoxNS.Types;
 using System;
+using System.Collections.Generic;
+using System.Text.RegularExpressions;
 
 namespace FastColoredTextBoxNS.FindReplaceForms {
 	/// <summary>
